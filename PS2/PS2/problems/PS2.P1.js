@@ -1,4 +1,3 @@
-//fibonacci with generator
 
 function* fibs(){
     let[val1, val2, result] = [0,1,0]
@@ -10,22 +9,20 @@ function* fibs(){
     }
 }
 
-function* evenFib(count){
+function* evenFib(){
     let a = fibs();
-    let result = [];
-    while(count > 0){
+    while(true){
         let temp = a.next().value;
         if(temp % 2 == 0){
-            result.push(temp);
-            count --;
+            yield temp;
         }
     }
-    yield* result;
+
 }
 
 
 let counter = 6; // change counter for the first n even fibnumbers
-let b = evenFib(counter);
+let b = evenFib();
 while(counter-->0){
     console.log(`${b.next().value}`);
 }
