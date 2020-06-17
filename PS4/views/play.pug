@@ -1,0 +1,79 @@
+doctype html
+html
+  head
+    title Trivia
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+  body
+    block content
+
+block content
+  .container
+    h2 Questions
+    input#variable(type='text' value=quest hidden)
+    #questionContainer
+
+    button#submit(type='button') Submit
+
+  script.
+    window.onload = _ => {
+      let listQuesitons = JSON.parse(document.getElementById('variable').value);
+      let questionsCont = document.getElementById('questionContainer');
+
+      for(const val in listQuesitons){
+        questionsCont.innerHTML += "<div class='questions'><p> "+ val +". " + listQuesitons[val].question +" </p>" +
+                generateAnswers(listQuesitons[val].correct_answer,listQuesitons[val].incorrect_answers,listQuesitons[val].question) +
+                "<p class='correct' style='color:#008000;' hidden>correct</p>"+
+                "<p class='wrong' style='color:#ff0000;' hidden>wrong</p>"+
+                "<div>";
+      }
+
+      console.log(listQuesitons);
+    };
+
+    let generateAnswers = (correct, wrong,question) => { //returns on long html string with answers shuffled as radio boxes
+
+      let genShell = (text,char,name) => {
+        return  "<input class='a' type = 'radio' name = '" + name + "' value = '" + char + "'>" +
+                "<label>" + text + "</label>" +
+                "<br>"  }
+
+      let bigString = [genShell(correct,'a',question)];
+      for (let i in wrong){
+        bigString.push(genShell(wrong[i],'w',question));
+      }
+      // this array shuffle code taken from stack overflow link: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+
+      for (let i = bigString.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [bigString[i], bigString[j]] = [bigString[j], bigString[i]];
+      }
+      // i was too lazy to write it i am sorry
+      bigString = bigString.join(' ')
+      return bigString;
+    }
+
+
+    // Check if answers are correct display result
+    document.getElementById("submit").addEventListener("click", function (event) {
+      let listOfAnswers = document.getElementsByClassName("questions");
+      let i;
+      for (i =0; i<listOfAnswers.length;i++){
+        let p = listOfAnswers[i].getElementsByTagName("input");
+        let k;
+        for (k =0; k<p.length;k++) {
+          if (p[k].checked && p[k].value== 'a') {
+            (listOfAnswers[i].getElementsByClassName("correct"))[0].hidden = false;
+            (listOfAnswers[i].getElementsByClassName("wrong"))[0].hidden = true;
+            break;
+          }
+          (listOfAnswers[i].getElementsByClassName("wrong"))[0].hidden = false;
+          (listOfAnswers[i].getElementsByClassName("correct"))[0].hidden = true;
+        }
+      }
+    });
+
+
+
+
+

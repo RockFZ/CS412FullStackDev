@@ -14,8 +14,22 @@ a {
 }
 
 .question{
-  display: grid;
+  display: bloack;
 }
+
+.questions{
+  border: 1px solid;
+  border-color: #C9C9C9;
+  margin: 1em;
+  width: 830px;
+  padding: 1em 2em 1em 2em;
+}
+
+.indexform{
+  display: block;
+  text-align: center;
+}
+
 
 .container{
   display: grid;
