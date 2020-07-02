@@ -1,0 +1,2 @@
+<app-form *ngIf="!loadedQuestions" (jfile)="pushtoQuestion($event)"></app-form>
+<app-questions *ngIf="loadedQuestions" [questions]="questionsRes" [cacho]="cached"></app-questions>

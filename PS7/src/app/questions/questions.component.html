@@ -1,30 +1,25 @@
-<!DOCTYPE html>
-<html>
-
 <body>
-</body>
-
-</html>
 <div class="container">
-
-  <button id="submit" type="button" (click)="showQuestions()">Fetch Questions</button>
-
-  <div *ngIf="sq">
+  <div>
     <h2>Questions</h2>
+    <h5>From cache: {{cacho}}</h5>
     <input id="variable" type="text" hidden>
     <div id="questionContainer">
       <ul *ngFor="let question of questions">
         <ul class='questions'>
           <li><p> {{question.question}} </p></li>
           <input class='a' type = 'radio' name = {{question.question}} value = 'a'>
-          <label>{{question.correctAnswer}}</label>
+          <label>{{question.correct_answer}}</label>
+          <ul *ngFor="let wa of question.incorrect_answers" id="incans">
+            <input class='w' type = 'radio' name = {{question.question}} value = 'w'>
+            <label>{{wa}}</label>
+          </ul>
         </ul>
-        <ul *ngFor="let wa of question.incorrectAnswers">
-          <input class='w' type = 'radio' name = {{question.question}} value = 'w'>
-          <label>{{wa}}</label>
-        </ul>
+
       </ul>
     </div>
   </div>
 </div>
+</body>
+
 

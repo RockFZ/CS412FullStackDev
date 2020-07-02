@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+  <div class="container">
+    <h1 id="title">Trivia</h1>
+    <div class="indexform">
+      <form (ngSubmit)="getQuestions()">
+        <h3>Sharpen your trivia skills (50 questions Max) !</h3>
+        <p>How Many Questions would you like?</p>
+        <input class="form-control" name="number" [(ngModel)]="numbers"  required minlength="2"/>
+        <button id="generate" type="submit" >Generate</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+
